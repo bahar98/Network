@@ -25,11 +25,11 @@ After setting up the FreeRADIUS server to work in GNS3 environment, it's time to
 
 1. Start the server.
 
-3. In the auxiliary console (right-click on the server and choose Auxiliary console or `telnet 127.0.0.1 {port}` (port is the number of the port that is assigned to the auxiliary console for this server. Can be determined usuing the first method, usually is the next port after the main console.)), you can see the configurations for the server. It behaves as a linux system since it is based on alpine. 
+2. In the auxiliary console (right-click on the server and choose Auxiliary console or `telnet 127.0.0.1 {port}` (port is the number of the port that is assigned to the auxiliary console for this server. Can be determined usuing the first method, usually is the next port after the main console.)), you can see the configurations for the server. It behaves as a linux system since it is based on alpine. 
 
-5. Go to the `/tc/raddb/clients.conf` file to add a client that is going to be getting some service from the FreeRADIUS server. Add the clinet to the end of the file.
-``` bash
-vi /etc/raddb/clients.conf
+3. Go to the `/etc/raddb/clients.conf` file to add a client that is going to be getting some service from the FreeRADIUS server (In this instance the client is the router that is connected to the server and is called nas in aaa. This router is the one that will be sending aaa requests to the server.) Add the clinet to the end of the file.
+```vim
+$ vi /etc/raddb/clients.conf
 client R1 {
   ipv4addr = 192.168.1.1
   proto = udp 
@@ -37,7 +37,22 @@ client R1 {
   nas_type = cisco
 }
 ```
-5. 
+4. Go to the `/etc/raddb/users` file to add a user. This user is going to be used to authenticate a session on nas. Authorization and accounting services can also be configured for this user and nas. Add the users to the end of the file.
+```vim
+$ vi /etc/raddb/users
+user1 Cleartext-Password := "123"
+  Service-Type = Shell-User,
+  Cisco-AVPair = "shell:priv-lvl=15"
+user2 Cleartext-Password := "234"
+  Service-Type = Login,
+  Cisco-AVPair = "shell:priv-lvl=1"
+user3 Cleartext-Password := "345"
+  Service-Type = NAS-Prompt-User,
+  Cisco-AVPair = "shell:priv-lvl=2"
+```
+
+5. Then go to the configuraton of the server (right-click -> configuration -> edit) and uncomment the lines related to the configuration of the interface of the server that is connected to the nas
+
 6. After specifying the server configurations, you need to stop and start the server for the changes to be written and take effect.
 7. (optional) Use the main console to see reports of aaa activities and attribute values that are being sent and recieved by the server.
 
