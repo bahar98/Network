@@ -2,7 +2,7 @@
 
 ### FreeRADIUS server setup for GNS3
 
-At first i tried to install FreeRADIUS server using [this link](https://computingforgeeks.com/how-to-install-freeradius-and-daloradius-on-ubuntu/). It appeared tp be successful but i couldn't figure out a way to connect a cisco router in GNS3 environment to this server. 
+At first i tried to install FreeRADIUS server using [this link](https://computingforgeeks.com/how-to-install-freeradius-and-daloradius-on-ubuntu/). It appeared to be successful but i couldn't figure out a way to connect a cisco router in GNS3 environment to this server. 
 
 After this attempt i tried to go [this](https://github.com/kazkansouh/gns3-freeradius) route which was successful. These are the steps that I took:
 
