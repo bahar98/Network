@@ -124,8 +124,19 @@ mods-config/files/
 mods-config/files/authorize
 ```
 6. Add test client and user.
+```bash
+vi clients.conf
+client dockernet {
+	ipaddr = 172.17.0.0/16
+	secret = testing123
+}
+vi authorize
+bob	Cleartext-Password := "test"
+```
+7. Build the image locally. (Build a second image based on the [freeradius/freeradius-server](https://hub.docker.com/r/freeradius/freeradius-server) with the changes discussed above. Build this image in you working directory.)
+```bash
 
-
+```
 
 
 
