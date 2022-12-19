@@ -1,4 +1,4 @@
-```python
+
 en
 sh version
 dir
@@ -13,4 +13,3 @@ sh version
 reboot
 #image changed 
 
-```
