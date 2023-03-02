@@ -1,0 +1,6 @@
+change image:
+#reboot recovery
+....
+#ip add 192.168.60.73/24
+ip route add 192.168.0.0/24 192.168.60.2
+update -u http://192.168.0.19(image server)/...(image name).bin
